@@ -1,14 +1,21 @@
-<button onclick="openSite()">Open</button>
+<button id="openBtn">Open Site</button>
 
 <script>
-function openSite() {
-  const url = document.getElementById('url').value;
+document.getElementById('openBtn').addEventListener('click', () => {
+  const url = document.getElementById('url').value.trim();
 
-  if (!url.startsWith('http')) {
-    alert('Include https://');
+  if (!url) {
+    alert('Enter a URL');
     return;
   }
 
-  window.open(url, '_blank');
-}
+  let finalUrl = url;
+
+  if (!finalUrl.startsWith('http://') &&
+      !finalUrl.startsWith('https://')) {
+    finalUrl = 'https://' + finalUrl;
+  }
+
+  window.location.href = finalUrl;
+});
 </script>
